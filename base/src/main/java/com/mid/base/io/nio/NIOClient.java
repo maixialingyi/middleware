@@ -10,38 +10,36 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class NIOClient {
-    private Selector selector = null;
-    private SocketChannel socketChannel = null;
-    private String nickName = "";
+    private final Selector selector = Selector.open();
+    private AtomicLong atomicLong = new AtomicLong(0);
+    private final LinkedBlockingDeque<Long> outgoingQueue = new LinkedBlockingDeque<Long>();
+
     private Charset charset = Charset.forName("UTF-8");
-    private static String USER_EXIST = "系统提示：该昵称已经存在，请换一个昵称";
-    private static String USER_CONTENT_SPLIT = "#@#";
-    public NIOClient(InetSocketAddress serverAddress){
-        try {
-            //获取selector
-            selector = Selector.open();
-            //获取socketChannel
-            socketChannel = SocketChannel.open();
-            //连接到服务
-            socketChannel.connect(serverAddress);
-            //设置为非阻塞
-            socketChannel.configureBlocking(false);
-            //向selector注册感兴趣事件 读数据类型
-            socketChannel.register(selector, SelectionKey.OP_READ);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void session(){
-        //开辟一个新线程从服务器端读数据
+    public NIOClient(InetSocketAddress addr) throws IOException {
+        this.createSocketChannelRegisterAndConnect(addr);
+        //开辟一个新线程处理IO读写
         new Reader().start();
-        //开辟一个新线程往服务器端写数据
-        new Writer().start();
     }
 
+    //创建SocketChannel，注册selecter 和 创建连接
+    void createSocketChannelRegisterAndConnect(InetSocketAddress addr) throws IOException {
+        SocketChannel socketChannel;
+        socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(false);//设置非阻塞
+        socketChannel.socket().setSoLinger(false, -1);
+        socketChannel.socket().setTcpNoDelay(true);
+        //注册连接事件
+        SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
+        //发送连接,此处为异步
+        socketChannel.connect(addr);
+    }
+
+    //sockKey.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
     private class Reader extends Thread {
         public void run() {
             try {
@@ -49,22 +47,35 @@ public class NIOClient {
                 while(true) {
                     int readyChannels = selector.select();
                     if(readyChannels == 0) continue;
-                    Set<SelectionKey> selectedKeys = selector.selectedKeys();  //可以通过这个方法，知道可用通道的集合
+
+                    Set<SelectionKey> selectedKeys = selector.selectedKeys();
                     Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
                     while(keyIterator.hasNext()) {
                         SelectionKey selectionKey = keyIterator.next();
                         keyIterator.remove();
+
+                        SocketChannel sc = (SocketChannel)selectionKey.channel();
+
+                        //连接未完成，有可能连接失败，此处要加重连逻辑  暂时不加
+                        if(!selectionKey.isConnectable()){
+                            break;
+                        }
+
                         if(selectionKey.isReadable()){//事件类型为读取数据
-                            SocketChannel sc = (SocketChannel)selectionKey.channel();
                             ByteBuffer buff = ByteBuffer.allocate(1024);
                             String content = "";
                             while(sc.read(buff) > 0){
                                 buff.flip();
-                                content += charset.decode(buff);
+                                content += buff.toString();
                             }
                             //继续可以接收读事件
                             selectionKey.interestOps(SelectionKey.OP_READ);
                             System.out.println("Reader 线程读到服务端返回数据："+content);
+                        }else if(selectionKey.isWritable()){
+                            Long l = atomicLong.incrementAndGet();
+                            sc.write(charset.encode(String.valueOf(l)));
+                            selectionKey.interestOps(SelectionKey.OP_WRITE);
+                            System.out.println("客户端写出 ："+l);
                         }
                     }
                 }
@@ -75,29 +86,8 @@ public class NIOClient {
         }
     }
 
-    private class Writer extends Thread{
-
-        @Override
-        public void run() {
-            try{
-                Scanner scan = new Scanner(System.in);
-                String m="-1";
-                while(!"t".equalsIgnoreCase(m)){
-                    System.out.println("输入发送信息：");
-                    m = scan.next();
-                    socketChannel.write(charset.encode(m+"--"+String.valueOf(System.currentTimeMillis())));
-                }
-                //scan.close();
-            }catch(Exception e){
-
-            }
-        }
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         InetSocketAddress serverAddress = new InetSocketAddress("127.0.0.1", 8081);
-        new NIOClient(serverAddress).session();
+        new NIOClient(serverAddress);
     }
-
-
 }
