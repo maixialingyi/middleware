@@ -17,6 +17,8 @@
         <module>thrift</module>
         <module>elasticsearch</module>
         <module>zookeeper</module>
+        <module>base</module>
+        <module>project</module>
     </modules>
 
     <properties>
@@ -26,7 +28,6 @@
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
-        <fastjson.verison>1.2.66</fastjson.verison>
     </properties>
 
     <dependencyManagement>

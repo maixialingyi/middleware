@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jsy.service.mapper.ColumMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jsy.service.common.entity.Colum">
+        <id column="id" property="id" />
+        <result column="t_tinyint1" property="tTinyint1" />
+        <result column="t_tinyint4" property="tTinyint4" />
+        <result column="t_int" property="tInt" />
+        <result column="t_decimal" property="tDecimal" />
+        <result column="t_datetime" property="tDatetime" />
+        <result column="t_char" property="tChar" />
+        <result column="t_varchar" property="tVarchar" />
+    </resultMap>
+
+    <select id="testPageHelper" parameterType="com.jsy.service.common.entity.Colum" resultMap="BaseResultMap">
+        select * from colum
+    </select>
+</mapper>
