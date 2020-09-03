@@ -2,7 +2,7 @@ server:
   port: 8002
 spring:
   application:
-    name: template-service #服务名称
+    name: project #服务名称
   profiles:
     active: local
 

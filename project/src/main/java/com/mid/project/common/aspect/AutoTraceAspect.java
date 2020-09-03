@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class AutoTraceAspect {
-    @Around(value = "@annotation(com.jsy.service.common.aspect.AutoTracer)")
+    @Around(value = "@annotation(com.mid.project.common.aspect.AutoTracer)")
     public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         AutoTracer tracer = AnnotationUtil.findAnnotation(joinPoint, AutoTracer.class);
