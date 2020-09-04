@@ -36,10 +36,11 @@ import java.util.Map;
 public class LogParamAspect {
 
 
-    @Around(value = "execution(public * com.mid.catexception.adapter.http.controller.TestExceptionController.*(..)) ||"
+    /*@Around(value = "execution(public * com.mid.catexception.adapter.http.controller.TestExceptionController.*(..)) ||"
                 + "execution(public * com.mid.catexception.adapter.http.controller.TestCheckExceptionController.*(..)) ||"
                 + "execution(public * com.mid.catexception.adapter.http.controller.TestUnCheckExceptionController.*(..))"
-    )
+    )*/
+    @Around(value = "execution(public * com.mid.catexception.adapter.http.controller.TestExceptionController.*(..))")
     public Result logParam(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String className = joinPoint.getTarget().getClass().getName();
