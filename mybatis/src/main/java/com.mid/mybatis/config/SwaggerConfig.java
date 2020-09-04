@@ -1,4 +1,4 @@
-package com.mid.project.config;
+package com.mid.mybatis.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;

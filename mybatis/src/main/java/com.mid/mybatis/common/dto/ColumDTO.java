@@ -1,6 +1,6 @@
 package com.mid.project.common.dto;
 
-import com.jsy.service.common.util.PageInfo;
+import com.mid.project.common.util.PageInfo;
 import lombok.Data;
 
 import java.math.BigDecimal;
