@@ -18,7 +18,6 @@
         <module>elasticsearch</module>
         <module>zookeeper</module>
         <module>base</module>
-        <module>project</module>
         <module>mybatis</module>
         <module>cat-exception</module>
     </modules>
