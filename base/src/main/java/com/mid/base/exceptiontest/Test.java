@@ -44,18 +44,15 @@ public class Test {
     public int threefinally() {
         int a = 0;
         try{
-            if(1==1){
-                throw new IOException();
-            }
             return 1;
         }catch (Exception e){
             return 3;
         } finally{
-            return 2;
-        }
+            System.out.println("----");        }
     }
     public static void main(String[] args) throws IOException {
         Test test = new Test();
         System.out.println(test.threefinally());
+
     }
 }
