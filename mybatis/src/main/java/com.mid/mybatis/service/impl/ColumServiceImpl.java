@@ -1,12 +1,8 @@
-package com.mid.project.service.impl;
+package com.mid.mybatis.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jsy.service.common.dto.ColumDTO;
-import com.jsy.service.common.entity.Colum;
-import com.jsy.service.mapper.ColumMapper;
-import com.jsy.service.service.IColumService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,19 +18,19 @@ import java.util.List;
  * @since 2020-06-08
  */
 @Service
-public class ColumServiceImpl extends ServiceImpl<ColumMapper, Colum> implements IColumService {
+public class ColumServiceImpl extends ServiceImpl<com.mid.project.mapper.ColumMapper, com.mid.project.common.entity.Colum> implements com.mid.project.service.IColumService {
 
     @Autowired
-    private ColumMapper columMapper;
+    private com.mid.project.mapper.ColumMapper columMapper;
 
     @Override
-    public List<Colum> testPageHelper(ColumDTO columDTO) {
+    public List<com.mid.project.common.entity.Colum> testPageHelper(com.mid.project.common.dto.ColumDTO columDTO) {
         PageHelper.startPage(columDTO.getPageNum(), columDTO.getPageSize());
-        Colum colum = new Colum();
+        com.mid.project.common.entity.Colum colum = new com.mid.project.common.entity.Colum();
         BeanUtils.copyProperties(columDTO, colum);
-        List<Colum> list = columMapper.testPageHelper(colum);
+        List<com.mid.project.common.entity.Colum> list = columMapper.testPageHelper(colum);
         //此list如果再处理需关注total
-        PageInfo<Colum> pageInfoVO = new PageInfo<Colum>(list);
+        PageInfo<com.mid.project.common.entity.Colum> pageInfoVO = new PageInfo<com.mid.project.common.entity.Colum>(list);
         return pageInfoVO.getList();
     }
 }
