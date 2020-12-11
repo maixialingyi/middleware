@@ -8,11 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="redis" />
         <module name="dubbo" />
-        <module name="project" />
+        <module name="thrift" />
         <module name="kafka" />
         <module name="base" />
         <module name="feignribbonnacos" />
-        <module name="thrift" />
+        <module name="project" />
         <module name="zookeeper" />
         <module name="cat-exception" />
         <module name="elasticsearch" />
