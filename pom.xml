@@ -20,6 +20,8 @@
         <module>base</module>
         <module>mybatis</module>
         <module>cat-exception</module>
+        <module>meituandemo</module>
+        <module>zhongXinAdapter</module>
     </modules>
 
     <properties>

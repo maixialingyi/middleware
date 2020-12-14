@@ -1,6 +1,6 @@
-package com.mid.project.controller;
+//package com.mid.project.controller;
 
-import com.jsy.service.common.aspect.AutoTracer;
+/*import com.jsy.service.common.aspect.AutoTracer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,4 +22,4 @@ public class ColumController {
 
 
 
-}
+}*/
