@@ -7,15 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="redis" />
-        <module name="zhongXinAdapter" />
         <module name="dubbo" />
-        <module name="thrift" />
-        <module name="kafka" />
-        <module name="base" />
-        <module name="meituandemo" />
-        <module name="feignribbonnacos" />
         <module name="project" />
+        <module name="zhongXinAdapter" />
+        <module name="kafka" />
+        <module name="meituandemo" />
+        <module name="base" />
+        <module name="thrift" />
         <module name="zookeeper" />
+        <module name="feignribbonnacos" />
         <module name="cat-exception" />
         <module name="elasticsearch" />
       </profile>
