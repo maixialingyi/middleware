@@ -8,15 +8,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="redis" />
         <module name="dubbo" />
+        <module name="cat-exception" />
         <module name="zhongXinAdapter" />
         <module name="kafka" />
-        <module name="thrift" />
         <module name="meituandemo" />
         <module name="base" />
         <module name="project" />
         <module name="zookeeper" />
         <module name="feignribbonnacos" />
-        <module name="cat-exception" />
+        <module name="thrift" />
         <module name="elasticsearch" />
       </profile>
     </annotationProcessing>
