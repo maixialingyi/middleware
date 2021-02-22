@@ -4,6 +4,7 @@ package com.mid.catexception.adapter.http.aspect;
 import com.alibaba.fastjson.JSON;
 import com.mid.catexception.adapter.http.exception.BaseBizException;
 import com.mid.catexception.adapter.http.exception.BizCode;
+import com.mid.catexception.adapter.util.ExceptionUtil;
 import com.mid.catexception.adapter.util.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -61,7 +62,7 @@ public class LogParamAspect {
 
         }  catch (BaseBizException e) {
             log.warn("Http请求返回业务异常, code={}, message={}, url={}, className={}, methodName={}, request={}", e.getCode(),
-                    e.getMessage(), url, className, methodName, requestParam, e);
+                    e.getMessage(), url, className, methodName, requestParam, ExceptionUtil.getStackTrace(e));
             //cat监控 event business埋点  监控报警层面，warn级别，累计到阈值报警
             //CatUtil.logHttpRequestFailure(joinPoint, e);
             result = Result.fail(e.getCode(), e.getBizCode().getMessage());
