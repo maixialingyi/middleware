@@ -1,8 +1,5 @@
 package com.mid.base.threadModule.Thread;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ThreadLocalTest {
     private static ThreadLocal threadLocal = new ThreadLocal();
     private static ThreadLocal inthreadLocal = new InheritableThreadLocal();
@@ -10,17 +7,31 @@ public class ThreadLocalTest {
     static class MyThread extends Thread{
         @Override
         public void run() {
+            ThreadLocalTest.threadLocal.set("MyThread");
+            ThreadLocalTest.inthreadLocal.set("MyThread");
+            threadLocal.remove();
             System.out.println(threadLocal.get());
             System.out.println(inthreadLocal.get());
-            new MyThread().run();
+
+            new MySubThread().start();
         }
     }
+
+    static class MySubThread extends Thread{
+        @Override
+        public void run() {
+            ThreadLocalTest.threadLocal.set("MySubThread");
+            System.out.println(threadLocal.get());
+            System.out.println(inthreadLocal.get());
+        }
+    }
+
     public static void main(String[] args) {
-        threadLocal.set("parent");
+        ThreadLocalTest.threadLocal.set("parent");
         //inthreadLocal.set("parent");
 
-        new MyThread().run();
-
+        new MyThread().start();
+        Object[] objects = new Object[3];
 
     }
 }
