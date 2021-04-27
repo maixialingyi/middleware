@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="redis" />
         <module name="dubbo" />
-        <module name="project" />
         <module name="zhongXinAdapter" />
         <module name="kafka" />
         <module name="meituandemo" />
@@ -22,6 +21,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mybatis" target="8" />
+      <module name="project" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
