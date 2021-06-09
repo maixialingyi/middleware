@@ -2,6 +2,7 @@ package com.mid.base.threadModule.collection.syn;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author jiangshaoyue
@@ -30,6 +31,7 @@ public class ConcurrentHashMapTest {
         });
         t.start();
         t.join();
+        ConcurrentHashMap map1=new ConcurrentHashMap();
     }
     public static void main(String args[]) throws InterruptedException {
         ConcurrentHashMapTest.testHashMapDeadLoop();
