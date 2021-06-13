@@ -17,6 +17,7 @@ public class AqsConditionTest {
         lock.lock();
         try {
             condition.await();
+            condition.signal();
         }finally {
             lock.unlock();
         }

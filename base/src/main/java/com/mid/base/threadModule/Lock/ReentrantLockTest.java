@@ -1,5 +1,7 @@
 package com.mid.base.threadModule.Lock;
 
+import lombok.SneakyThrows;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,25 +11,20 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ReentrantLockTest {
 
-    public void handler(){
-        Lock lock = new ReentrantLock();
-        lock.lock();
-        try {
-            System.out.println(Thread.currentThread().getName());
-        }finally {
-            lock.unlock();
-        }
-    }
-
     public static void main(String args[]) {
-        final ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
-        for (int i = 0; i < 100000; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    reentrantLockTest.handler();
-                }
-            }, "threadName" + 1).start();
-        }
+        Lock lock = new ReentrantLock(true);
+        Thread thread = new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                lock.lock();
+                Thread.sleep(5000);
+                System.out.println(Thread.currentThread().getName());
+                lock.unlock();
+            }
+        }, "threadName-1");
+
+        thread.start();
+        thread.interrupt();
     }
 }
