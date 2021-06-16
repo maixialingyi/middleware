@@ -32,5 +32,11 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
+        <!--对象复制框架-->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.4.6</version>
+        </dependency>
     </dependencies>
 </project>
