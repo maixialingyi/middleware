@@ -1,10 +1,7 @@
-package com.mid.base.gc;
+package com.mid.base.gc.MetaSpaceTest;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.SourceCodeContext;
 
 /**
  *

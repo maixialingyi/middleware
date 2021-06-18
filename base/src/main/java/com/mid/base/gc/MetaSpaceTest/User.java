@@ -1,4 +1,4 @@
-package com.mid.base.gc;
+package com.mid.base.gc.MetaSpaceTest;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
