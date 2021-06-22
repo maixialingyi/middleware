@@ -2,6 +2,7 @@ package com.mid.base.gc.MetaSpaceTest;
 
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import ma.glasnost.orika.metadata.ClassMapBuilder;
 
 /**
  *

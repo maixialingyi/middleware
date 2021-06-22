@@ -1,5 +1,9 @@
 package com.mid.base.gc.ReferenceTest;
 
+
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
+
 /**
  *  -XX:+PrintGC                           输出GC日志
  *  -XX:+PrintGCDetails                    输出GC的详细日志
@@ -12,6 +16,7 @@ public class FinalReferenceTest {
         for( ;; ) {
             for (int i = 0; i < 1000; i++) {
                 Person p = new Person();
+                System.out.println("");
             }
             System.gc();//增加垃圾回收器启动的概率
         }
