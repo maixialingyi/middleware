@@ -10,6 +10,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/meituandemo/pom.xml" />
+        <option value="$PROJECT_DIR$/springaoptest/pom.xml" />
       </set>
     </option>
   </component>

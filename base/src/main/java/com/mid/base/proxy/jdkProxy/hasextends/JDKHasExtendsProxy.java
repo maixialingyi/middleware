@@ -39,5 +39,6 @@ public class JDKHasExtendsProxy implements InvocationHandler {
         // jdk动态代理测试
         ISubject subject = new JDKHasExtendsProxy(new RealSubject()).getProxy();
         subject.pull();
+        subject.push();
     }
 }

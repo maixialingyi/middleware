@@ -23,6 +23,7 @@
         <module>meituandemo</module>
         <module>zhongXinAdapter</module>
         <module>springboottest</module>
+        <module>springaoptest</module>
     </modules>
 
     <properties>
